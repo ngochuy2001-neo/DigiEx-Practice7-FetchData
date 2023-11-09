@@ -6,6 +6,7 @@ import { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react'
 import {TbPlayerTrackNextFilled, TbPlayerTrackPrevFilled} from 'react-icons/tb'
 import { IPostDataFormat } from '@/utils/interfaces'
 import { chunkArray, fetchGETPost } from '@/utils/helpers'
+import { Pagination } from '@/components/Pagination'
 
 export default function Home() {
   const [data, setData] = useState<IPostDataFormat[]>([])
@@ -20,6 +21,7 @@ export default function Home() {
 
   useEffect(() => {
     setDisplayData(chunkArray(data,10));
+    console.log("check")
   },[data])
 
   useEffect(() => {
@@ -46,16 +48,18 @@ export default function Home() {
   }
 
   const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log("check")
     if(e.target.value === "") {
       fetchGETPost('https://jsonplaceholder.typicode.com/posts', setData);
+      return;
     }
     const searchText = e.target.value;
-    setData((prevData) => {
-      const filteredData = prevData.filter((post) => {
+    setDisplayData(() => {
+      const filteredData = data.filter((post) => {
         return post.title.toLowerCase().includes(searchText.toLowerCase())
       })
       setDisplayPage(1);
-      return filteredData;
+      return chunkArray(filteredData,10);
     })
   }
   return (
@@ -70,17 +74,18 @@ export default function Home() {
         }
       </div>
       <div className='w-full h-[75px] bg-white flex justify-center'>
-        <div className='flex items-center'>
+        {/* <div className='flex items-center'>
           <button onClick={handlePrevPage} disabled={displayPage === 1} className={`h-[40px] w-[50px] flex justify-center items-center border-2 rounded-l-md ${displayPage === 1? "opacity-50": "hover:bg-blue-600 hover:text-white"}`}>
             <TbPlayerTrackPrevFilled />
           </button>
           <p className={`h-[40px] w-[100px] border-t-2 border-b-2 flex justify-center items-center `}>
-            {`${displayPage}/${Math.ceil(data.length/10)}`}
+            {`${displayPage}/${Math.ceil(displayData.length)}`}
           </p>
           <button onClick={handleNextPage} disabled={displayPage === Math.floor(data.length + 9)/10} className={`h-[40px] w-[50px] flex justify-center items-center border-2 rounded-r-md ${displayPage === Math.floor((data.length + 9) /10)? " opacity-40": "hover:bg-blue-600 hover:text-white"}`}>
             <TbPlayerTrackNextFilled />
           </button>
-        </div>
+        </div> */}
+        <Pagination displayPage={displayPage} setDisplayPage={setDisplayPage} maxPage={displayData.length}/>
       </div>
     </div>
   )
