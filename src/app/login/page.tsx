@@ -3,7 +3,7 @@ import { FcGoogle } from "react-icons/fc"
 import { FaGithub } from "react-icons/fa"
 import { useRouter } from "next/navigation"
 import { auth, githubProvider } from "@/utils/firebase.config"
-import { FacebookAuthProvider, GithubAuthProvider, fetchSignInMethodsForEmail, GoogleAuthProvider, signInWithPopup, signInWithCredential, linkWithCredential } from "firebase/auth"
+import { GithubAuthProvider, fetchSignInMethodsForEmail, GoogleAuthProvider, signInWithPopup, signInWithCredential, linkWithCredential } from "firebase/auth"
 import { useState } from "react"
 
 const Login = () => {

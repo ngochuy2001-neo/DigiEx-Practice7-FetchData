@@ -1,9 +1,11 @@
-
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { GithubAuthProvider, getAuth } from "firebase/auth";
-import { GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth/cordova";
+import {
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+} from "firebase/auth/cordova";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -16,7 +18,7 @@ export const firebaseConfig = {
   storageBucket: "digiextraining.appspot.com",
   messagingSenderId: "201042315792",
   appId: "1:201042315792:web:c8ad50a2f9f1f0f9359895",
-  measurementId: "G-KGKZ6X38PX"
+  measurementId: "G-KGKZ6X38PX",
 };
 
 // Initialize Firebase
@@ -26,8 +28,8 @@ const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
 const githubProvider = new GithubAuthProvider();
 
-if (typeof window != "undefined"){
+if (typeof window != "undefined") {
   const analytics = getAnalytics(app);
 }
 
-export {auth, googleProvider, facebookProvider, githubProvider}
+export { auth, googleProvider, facebookProvider, githubProvider };

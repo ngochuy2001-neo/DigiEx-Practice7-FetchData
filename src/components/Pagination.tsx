@@ -19,10 +19,6 @@ export const Pagination = ({displayPage, setDisplayPage, maxPage}: IPagination) 
     setDisplayPage(1);
   }
 
-  const handleSetPage = (page: number) => {
-    setDisplayPage(page)
-  }
-
   const handleSkipNext = () => {
     setDisplayPage(maxPage)
   }
